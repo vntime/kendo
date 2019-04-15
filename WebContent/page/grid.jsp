@@ -17,6 +17,10 @@
 </head>
 <body>
 
+<div id="grid"></div>
+<div id="grid1"></div>
+<div id="grid2"></div>
+
 <script>
 var ReportServletURL = "${pageContext.request.contextPath}/ReportServlet";
 </script>

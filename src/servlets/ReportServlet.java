@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
 
 import model.ColumnModel;
+import model.bean.BaseBean;
 import utils.AppConfig;
 
 /**
@@ -33,13 +36,23 @@ public class ReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ColumnModel columnModel = (ColumnModel) AppConfig.getBean(ColumnModel.class);
+        BaseBean bean = new BaseBean();
+        Gson gson = new Gson();
 
-        response.setContentType("text/html");
         try {
-            response.getWriter().write(new Gson().toJson(columnModel.selectByReportId("RP1")));
+            String data = gson.toJson(columnModel.selectByReportId("RP1"));
+            bean.setData(data);
+            bean.setStatus("SUCCESS");
+            bean.setDescription("SUCCESS");
         } catch (Exception e) {
             e.printStackTrace();
+            bean.setStatus("FAIL");
+            bean.setDescription("FAIL");
         }
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(gson.toJson(bean));
     }
 
     /**
