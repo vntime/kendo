@@ -5,7 +5,7 @@ package model;
 
 import java.util.List;
 
-import model.bean.ColumnBean;
+import model.bean.ColumnResponseBean;
 
 /**
  * @author admin
@@ -13,7 +13,7 @@ import model.bean.ColumnBean;
  */
 public interface ColumnModel {
 
-    public List<ColumnBean> selectAll() throws Exception;
+    public List<ColumnResponseBean> selectAll() throws Exception;
 
-    public List<ColumnBean> selectByReportId(String reportId) throws Exception;
+    public List<ColumnResponseBean> selectByReportId(String reportId) throws Exception;
 }

@@ -1,11 +1,16 @@
 package model.bean;
 
-public class ColumnBean {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ColumnResponseBean {
     private int id;
     private String report_id;
     private int column_id;
     private String title;
-    private String description;
+    private String field;
+    private int parentColumnId;
+    private List<ColumnResponseBean> columns = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -39,12 +44,28 @@ public class ColumnBean {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getField() {
+        return field;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public int getParentColumnId() {
+        return parentColumnId;
+    }
+
+    public void setParentColumnId(int parentColumnId) {
+        this.parentColumnId = parentColumnId;
+    }
+
+    public List<ColumnResponseBean> getColumns() {
+        return columns;
+    }
+
+    public void setColumns(List<ColumnResponseBean> columns) {
+        this.columns = columns;
     }
 
 }

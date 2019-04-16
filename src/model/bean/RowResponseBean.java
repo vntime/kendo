@@ -1,6 +1,6 @@
 package model.bean;
 
-public class RowBean {
+public class RowResponseBean {
     private int id;
     private String reportId;
     private int rowId;

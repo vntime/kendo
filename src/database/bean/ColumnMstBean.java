@@ -1,18 +1,15 @@
 package database.bean;
 
-import java.io.Serializable;
-
-public class ColumnMstBean implements Serializable {
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -4318071579175069321L;
+public class ColumnMstBean {
 
     private int id;
     private String report_id;
     private int column_id;
     private String title;
     private String description;
+    private int parent_column_id;
+    private int order_by;
+    private String field;
 
     public int getId() {
         return id;
@@ -52,6 +49,30 @@ public class ColumnMstBean implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getParent_column_id() {
+        return parent_column_id;
+    }
+
+    public void setParent_column_id(int parent_column_id) {
+        this.parent_column_id = parent_column_id;
+    }
+
+    public int getOrder_by() {
+        return order_by;
+    }
+
+    public void setOrder_by(int order_by) {
+        this.order_by = order_by;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
     }
 
 }

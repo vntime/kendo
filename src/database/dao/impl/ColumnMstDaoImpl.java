@@ -39,7 +39,7 @@ public class ColumnMstDaoImpl extends BaseMstDaoImpl implements ColumnMstDao {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public List<ColumnMstBean> selectByReportId(String reportId) {
-        String sql = "SELECT * FROM COLUMN_MST WHERE REPORT_ID = ?";
+        String sql = "SELECT * FROM COLUMN_MST WHERE REPORT_ID = ? ORDER BY ORDER_BY";
 
         List<ColumnMstBean> columnMstBeans = (List<ColumnMstBean>) getJdbcTemplate().query(sql,
                 new String[] { reportId }, new BeanPropertyRowMapper(ColumnMstBean.class));
