@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import model.ColumnModel;
-import model.bean.BaseResponseBean;
+import model.RowModel;
+import model.bean.ResponseBean;
 import utils.AppConfig;
 
 /**
@@ -34,22 +35,25 @@ public class ReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ColumnModel columnModel = (ColumnModel) AppConfig.getBean(ColumnModel.class);
-        BaseResponseBean bean = new BaseResponseBean();
+        RowModel rowModel = (RowModel) AppConfig.getBean(RowModel.class);
+        ResponseBean bean = new ResponseBean();
         Gson gson = new Gson();
-
         String method = request.getParameter("method");
 
-        if ("getHeaders".equals(method)) {
-            try {
+        try {
+            if ("getHeaders".equals(method)) {
                 bean.setData(columnModel.selectByReportId("RP1"));
                 bean.setStatus("SUCCESS");
                 bean.setDescription("SUCCESS");
-            } catch (Exception e) {
-                e.printStackTrace();
-                bean.setStatus("FAIL");
-                bean.setDescription("FAIL");
+            } else if ("getRows".equals(method)) {
+                bean.setData(rowModel.selectByReportId("RP1"));
+                bean.setStatus("SUCCESS");
+                bean.setDescription("SUCCESS");
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
+            bean.setStatus("FAIL");
+            bean.setDescription("FAIL");
         }
 
         response.setContentType("application/json");

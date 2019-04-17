@@ -1,6 +1,6 @@
 package model.bean;
 
-public class BaseResponseBean {
+public class ResponseBean {
 
     private String status;
     private String description;
