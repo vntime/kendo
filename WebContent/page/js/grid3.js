@@ -63,7 +63,7 @@ $(document).ready(function() {
             data : dataVar,
             schema : {
                 data : "rows",
-                model : { // model: can be removed
+                model : { // model: can be removed 
                     id : "codeLong",
                     fields : {
                         mssv : {
