@@ -1,26 +1,25 @@
+var dataVar = {
+    "rows" : [ {
+        "codeLong" : "AUT",
+        "codeShort" : "AT",
+        "name" : "Austria"
+    }, {
+        "codeLong" : "BEL",
+        "codeShort" : "BE",
+        "name" : "Belgium"
+    }, {
+        "codeLong" : "BGR",
+        "codeShort" : "BG",
+        "name" : "Bulgaria"
+    } ]
+};
 $(document).ready(function() {
     $("#grid").kendoGrid({
         dataSource : {
             type : "json",
-            data : {
-                json : JSON.stringify({
-                    "data" : [ {
-                        "codeLong" : "AUT",
-                        "codeShort" : "AT",
-                        "name" : "Austria"
-                    }, {
-                        "codeLong" : "BEL",
-                        "codeShort" : "BE",
-                        "name" : "Belgium"
-                    }, {
-                        "codeLong" : "BGR",
-                        "codeShort" : "BG",
-                        "name" : "Bulgaria"
-                    } ]
-                })
-            },
+            data : dataVar,
             schema : {
-                data : "data",
+                data : "rows",
                 model : {
                     id : "codeLong",
                     fields : {
@@ -28,10 +27,10 @@ $(document).ready(function() {
                             type : "string"
                         },
                         codeShort : {
-                            type : "number"
+                            type : "string"
                         },
                         name : {
-                            type : "number"
+                            type : "string"
                         }
                     }
                 }
@@ -46,10 +45,20 @@ $(document).ready(function() {
             input : true,
             numeric : false
         },
-        columns : [ "ProductName", {
+        columns : [ {
             field : "codeLong",
             title : "codeLong",
             width : "130px"
-        } ]
+        },{
+            field : "codeShort",
+            title : "codeShort",
+            width : "130px"
+        } ,
+        {
+            field : "name",
+            title : "name",
+            width : "130px"
+        } 
+        ]
     });
 });
