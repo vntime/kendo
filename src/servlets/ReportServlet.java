@@ -49,6 +49,10 @@ public class ReportServlet extends HttpServlet {
                 bean.setData(rowModel.selectByReportId("RP1"));
                 bean.setStatus("SUCCESS");
                 bean.setDescription("SUCCESS");
+            } else if ("getRows_2".equals(method)) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(gson.toJson(rowModel.selectByReportId("RP1")));
             }
         } catch (Exception e) {
             e.printStackTrace();

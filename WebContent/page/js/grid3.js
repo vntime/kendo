@@ -81,7 +81,7 @@ $(document).ready(function() {
                         age : {
                             type : "string"
                         },
-                        address2 : {
+                        address : {
                             type : "string"
                         }
                     }
