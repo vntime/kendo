@@ -56,6 +56,30 @@ var columnVar = [ {
     width : "130px"
 } ];
 
+var toolbarbutonVar = [
+    {
+        name : "delete",
+        template : '<a class="k-button pull-right" href="\\#" onclick=" return confirmdelete(this)" ><span class="k-icon k-deleteRow"></span>Xóa bản ghi</a>'
+    },
+     
+    {
+        name : "cancel",
+        text : "Hủy"
+    },
+    {
+        name : "save",
+        text : "Lưu",
+        template : '<a class="k-button pull-right" href="\\#"  onclick="gridSave(this)"><span class="k-icon k-addRowBelow"></span>Lưu</a>',
+        attributes : {
+            class : 'pull-right'
+        }
+    },
+    {
+        name : 'my-create',
+        text : 'Thêm mới',
+        template : '<a class="k-button pull-right" href="\\#"  onclick="gridAddNewRow(this)"><span class="k-icon k-addRowBelow"></span>Thêm mới</a>'
+    } ];
+
 $(document).ready(function() {
     $("#grid").kendoGrid({
         dataSource : {
@@ -79,7 +103,7 @@ $(document).ready(function() {
                             type : "string"
                         },
                         age : {
-                            type : "string"
+                            type : "number"
                         },
                         address : {
                             type : "string"
@@ -87,16 +111,57 @@ $(document).ready(function() {
                     }
                 }
             },
-            pageSize : 20
+            pageSize : 2
         },
+        dataBinding : function(args){
+            record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+        },
+        editable : "incell",
+        toolbar : toolbarbutonVar,
         height : 550,
         scrollable : true,
         sortable : true,
         filterable : true,
         pageable : {
             input : true,
-            numeric : false
+            numeric : false,
+            efresh : true,
+            pageSizes : [ 2, 5, 10 ],
+            messages : {
+                display : "Hiển thị {0}-{1} / {2} bản ghi",
+                first : "Trang đầu",
+                last : "Trang cuối",
+                next : "Trang tiếp theo",
+                previous : "Trở lại trang trước",
+                refresh : "Load lại dữ liệu",
+                page : "Trang",
+                itemsPerPage : "Số bản ghi trên 1 trang"
+            }
         },
+        messages : {
+            noRecords : "Không có bản ghi nào!",
+        },
+        columnMenu : false,
+        batch : true,
+        allowCopy : true,
         columns : columnVar
     });
 });
+
+
+function gridAddNewRow(e){
+    var newRow = {};
+    newRow.mssv='1234';
+    newRow.name = 'New name';
+    newRow.name_en = 'New name_en';
+    newRow.name_vn = 'New name_vn';
+    newRow.age = 9;
+    newRow.address = 'New address';
+    var lastRowNumber = $("#grid").data("kendoGrid").dataSource.data().length;
+    $("#grid").data("kendoGrid").dataSource.insert(lastRowNumber + 1, newRow);
+}
+
+function gridSave(e){
+    dataVar.rows = $("#grid").data("kendoGrid").dataSource._data;
+    $("#grid").data("kendoGrid").dataSource.read();
+}
