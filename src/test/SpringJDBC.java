@@ -2,21 +2,32 @@ package test;
 
 import java.util.List;
 
-import database.bean.RowMstBean;
-import database.dao.RowMstDao;
+import com.google.gson.Gson;
+
 import model.ColumnModel;
+import model.DataModel;
 import model.bean.ColumnResponseBean;
-import model.bean.RowResponseBean;
+import model.bean.DataResponseBean;
 import utils.AppConfig;
 
 public class SpringJDBC {
     public static void main(String[] args) throws Exception {
 
-        ColumnModel columnListMstDao = (ColumnModel) AppConfig.getBean(ColumnModel.class);
-        List<ColumnResponseBean> res = columnListMstDao.selectByReportId("RP1");
-        for (ColumnResponseBean columnListMstBean : res) {
-            System.out.println(columnListMstBean.getTitle());
+        Gson gson = new Gson();
+
+//        ColumnModel columnListMstDao = (ColumnModel) AppConfig.getBean(ColumnModel.class);
+//        List<ColumnResponseBean> res = columnListMstDao.selectByReportId("RP1");
+//        for (ColumnResponseBean columnListMstBean : res) {
+//            System.out.println(columnListMstBean.getTitle());
+//        }
+//        System.out.println("Success");
+
+        DataModel dataModel = (DataModel) AppConfig.getBean(DataModel.class);
+        List<DataResponseBean> dataResponseBeans = dataModel.select("rp1", "999", 2019, "T1");
+        if (dataResponseBeans != null & !dataResponseBeans.isEmpty()) {
+            System.out.println(gson.toJson(dataResponseBeans));
+        } else {
+            System.out.println("NULL");
         }
-        System.out.println("Success");
     }
 }
